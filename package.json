@@ -10,7 +10,7 @@
     "server": "nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-prebuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "heroku-postbuild": "concurrently \"npm run start\" \"npm run client\"",
+    "heroku-postbuild": "concurrently \"npm run start\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
