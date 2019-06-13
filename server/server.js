@@ -12,7 +12,6 @@ const schema = require("./schema/schema");
 const app = express();
 const path = require("path");
 const  { ApolloServer, gql } = require('apollo-server-express');
-
 const  { execute, subscribe } = require('graphql');
 const  { createServer } = require('http');
 const  { SubscriptionServer } = require('subscriptions-transport-ws');
@@ -21,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  })
+  });
 }
 
 if (!db) {
@@ -49,20 +48,22 @@ app.use(
   })
 );
 
-// Wrap the Express server
-const PORT = 4000;
 const ws = createServer(app);
-ws.listen(PORT, () => {
-  console.log(`Web Socket Server is now running on http://localhost:${PORT}`);
-  // Set up the WebSocket for handling GraphQL subscriptions
-  new SubscriptionServer({
-    execute,
-    subscribe,
-    schema,
-  }, {
-      server: ws,
-      path: '/subscriptions',
-    });
+const PORT = process.env.PORT || 5000;
+
+new SubscriptionServer({
+  execute,
+  subscribe,
+  schema,
+}, {
+    server: ws,
+    path: '/',
 });
+
+ws.listen(PORT, () => {
+  console.log(`Web Socket Server is now running on ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
+});
+
 
 module.exports = app;
