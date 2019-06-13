@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cmmeur01/ezeechat
+    environment:
+      NODE_ENV: production

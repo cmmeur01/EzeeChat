@@ -57,7 +57,7 @@ class CreateChannel extends Component {
         onCompleted={data => {
           const { name } = data.createChannel;
           this.setState({
-            message: `New channel ${name} was created successfully`
+            message: `New channel ${name} was created successfully, go back to the channels page to join the channel.`
           });
         }}
       >
@@ -71,7 +71,7 @@ class CreateChannel extends Component {
                 </div>
               </div>  
               <h3 className="channel-index-header">Create a new channel</h3>
-              <p>Slack gives your team the power to create as many channels you need to do your best work.</p>
+              <p>Give your new channel a descriptive name related to the topic of conversation. </p>
               <form className="channel-button-box channel-new-name-container" onSubmit={e => this.handleSubmit(e, createChannel)}>
                 <input
                   className="channel-detail-box channel-new-name"

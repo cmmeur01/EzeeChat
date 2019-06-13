@@ -31,8 +31,17 @@ const httpLink = createHttpLink({
   }
 });
 
+
+
+let wsUri;
+if (process.env.NODE_ENV === "production") {
+  wsUri = `wss://ezee-chat.herokuapp.com/`;
+} else {
+  wsUri = "ws://localhost:5000/";
+}
+
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:5000/`,
+  uri: wsUri,
   options: {
     reconnect: true,
     connectionParams: {
