@@ -15,6 +15,16 @@ class Login extends React.Component {
     };
   }
 
+  demoUser(e, loginUser) {
+    e.preventDefault();
+    loginUser({
+      variables: {
+        email: 'demo@demo.com',
+        password: 'password'
+      }
+    });
+  }
+
   update(field) {
     return e => this.setState({ [field]: e.target.value });
   }
@@ -70,6 +80,7 @@ class Login extends React.Component {
                 placeholder="Password"
               />
              <button type="submit">Sign In</button>
+             <button onClick={(e) => this.demoUser(e, loginUser)}>Demo Sign In</button>
             </form>
           </div>
         )}
