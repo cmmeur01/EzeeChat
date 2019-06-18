@@ -112,5 +112,13 @@ export default {
         name
       }
     }
+  `,
+  FETCH_USER: gql`
+    query fetchUser($id: ID!) {
+      user(_id: $id) {
+        name
+        email
+      }
+    }
   `
 };
