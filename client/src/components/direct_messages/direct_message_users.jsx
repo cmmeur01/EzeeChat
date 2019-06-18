@@ -59,14 +59,6 @@ class DirectMessageUsers extends React.Component {
                                     <div className="channel-browse-header">
                                       <h3 className="channel-index-header">Users</h3>
                                     </div>
-                                    <div>
-                                      <form className="channel-search">
-                                        <input
-                                          placeholder="Search users (isn't working right now!)"
-                                          className="channel-search-input"
-                                        />
-                                      </form>
-                                    </div>
                                 <ul>
                                   {fetchUsersData.users.map((user) => {
                                     return (

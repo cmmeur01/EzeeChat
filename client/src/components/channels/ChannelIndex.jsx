@@ -21,6 +21,7 @@ class ChannelIndex extends React.Component {
             {({ data }) => {
               const userId = data.currentUserId;
               let inChannel = false;
+              let count = 0;
               return (
                 
                <div className="whole-index">
@@ -30,16 +31,6 @@ class ChannelIndex extends React.Component {
 
                       <Link to="/channels/new"><button className="create-channel-button">Create Channel</button></Link>
                     </div>
-                  
-                    <div>
-                    <form className="channel-search">
-                      <input
-                        placeholder="Search channels"
-                        className="channel-search-input"
-                      />
-                    </form>
-                    
-                    </div>
                     {!channelData.channels || !channelData.channels.length ? (
                       null
                     ) : (
@@ -47,10 +38,14 @@ class ChannelIndex extends React.Component {
                           {channelData.channels.map(channel => {
                             inChannel = false;
                             channel.users.forEach(user => {
-                              if (user._id === userId) inChannel = true;
+                              if (user._id === userId) {
+                                inChannel = true;
+                                count++;
+                              };
                             })
                             if (!inChannel) return <ChannelDetail key={channel._id} id={channel._id} userId={userId}/>;
                           })}
+                          <p>{count === channelData.channels.length ? "You have already joined all the current channels. Create a new one :)" : null }</p>
                         </div>
                       )}
                   </div>
