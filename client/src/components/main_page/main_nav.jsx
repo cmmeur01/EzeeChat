@@ -15,7 +15,6 @@ const MainNav = props => {
         <div>
           <Query query={IS_LOGGED_IN}>
             {({ data }) => {
-              console.log(props.name.user);
               let name = '';
               if (props.name.user) name = props.name.user.name;
               if (data.isLoggedIn) {
@@ -23,9 +22,6 @@ const MainNav = props => {
                   <div className="left-panel">
                     <h1 className="app-header">EzeeChat</h1>
                     <p>Hey, {name}</p>
-
-
-
                     <UserChannelIndex currentUserId={props.currentUserId} />
                     <DirectMessageIndex currentUserId={props.currentUserId} />
                     <div className="log-out-button-container">

@@ -39,7 +39,8 @@ class DirectMessageUsers extends React.Component {
                   if (loading) return null;
                   if (error) return <p>Error</p>;
                   const messageData = data;
-                  const badUsers = messageData.fetchUserMessages.map((dm) => dm.users[1]._id)
+                  const badUsers = messageData.fetchUserMessages.map((dm) => dm.users[1]._id);
+                  badUsers.push(currentUserId);
                   return (
                     <Mutation
                       mutation={CREATE_DIRECT_MESSAGE}
@@ -54,11 +55,11 @@ class DirectMessageUsers extends React.Component {
                           {(!fetchUsersData.users || !fetchUsersData.users.length) ? (
                             null
                           ) : (
-                            badUsers.length === fetchUsersData.users.length ? (<p>Already messaging with everyone!</p>) : (
                               <div className="channel-index">
                                     <div className="channel-browse-header">
                                       <h3 className="channel-index-header">Users</h3>
                                     </div>
+                                  {badUsers.length === fetchUsersData.users.length ? <p>Already messaging with everyone!</p> : null}
                                 <ul>
                                   {fetchUsersData.users.map((user) => {
                                     return (
@@ -75,7 +76,7 @@ class DirectMessageUsers extends React.Component {
                                   })}
                                 </ul>
                               </div>
-                            ))}
+                            )}
                             <div className="exit-div">
                               <div className="exit-box">
                                 <a className="channel-index-exit" href={`/#/mainchat/`}>&#215;</a><br />

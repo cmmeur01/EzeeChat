@@ -1,5 +1,4 @@
 import './messages.scss';
-import { useEffect, useRef } from 'react';
 import React from 'react';
 import { Query, Subscription } from "react-apollo";
 import Queries from "../../graphql/queries";
@@ -10,16 +9,6 @@ const { FETCH_CHANNEL } = Queries;
 const { NEW_MESSAGE_SUBSCRIPTION, REMOVED_MESSAGE_SUBSCRIPTION } = Subscriptions;
 
 class MainChat extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-  }
-
-  componentDidUpdate() {
-  }
-
   render() {
     let channelId;
 
