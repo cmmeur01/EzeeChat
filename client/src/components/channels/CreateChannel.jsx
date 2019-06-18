@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
-
+import { Link } from 'react-router-dom';
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
 const { CREATE_CHANNEL } = Mutations;
-const { CREATE_CHANNELS } = Queries;
+const { CREATE_CHANNELS, FETCH_CHANNELS } = Queries;
 
 class CreateChannel extends Component {
   constructor(props) {
@@ -55,11 +55,11 @@ class CreateChannel extends Component {
         onError={err => this.setState({ message: err.message })}
         update={(cache, data) => this.updateCache(cache, data)}
         onCompleted={data => {
-          const { name } = data.createChannel;
           this.setState({
-            message: `New channel ${name} was created successfully, go back to the channels page to join the channel.`
+            message: `made channel`
           });
         }}
+        refetchQueries={() => [{ query: FETCH_CHANNELS }]}
       >
         {(createChannel, { data }) => (
           <div className="channel-index-create-container">
@@ -81,7 +81,7 @@ class CreateChannel extends Component {
                 />
                 <button className="create-channel-button" type="submit">Create Channel</button>
               </form>
-              <p>{this.state.message}</p>
+              {this.state.message ? <p>New channel {this.state.name} was created successfully, go back to the <Link to="/channels/">channels index</Link> to join the channel.</p>: null}
             </div>
           </div>
         )}
